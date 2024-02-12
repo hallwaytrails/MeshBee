@@ -1,0 +1,12 @@
+[Unit]
+Description=XBeeNet XBee TCP/IP Network
+After=network.target
+
+[Service]
+ExecStart=pipenv run python /opt/strangenet/strangenet/main.py
+Type=simple
+Restart=always
+WorkingDirectory=/opt/meshnet
+
+[Install]
+WantedBy=multi-user.target

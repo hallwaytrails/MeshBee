@@ -1,0 +1,19 @@
+__pycache__/
+logs/
+dbg/
+dbg-logs/
+*.tar.gz
+venv
+archive
+*.log
+basestation.egg-info/
+build/
+dist/
+.DS_Store
+
+# local test files
+test.py
+test-script.py
+sandbox.py
+todo.txt
+planning.txt
