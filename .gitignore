@@ -10,6 +10,7 @@ basestation.egg-info/
 build/
 dist/
 .DS_Store
+.vscode/
 
 # local test files
 test.py

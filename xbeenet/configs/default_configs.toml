@@ -1,0 +1,10 @@
+[net]
+ip = "10.0.0.1"
+networkId = "5266"
+
+[radio]
+port = '/dev/ttyUSB0'
+baud = 230400
+
+[tun]
+netmask = '255.255.255.0'
