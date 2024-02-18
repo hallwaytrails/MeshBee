@@ -1,17 +1,18 @@
 import select
 import logging
 from pypacker.layer3 import ip
-from pytun import TunTapDevice
+from pytun import TunTapDevice, IFF_TUN, IFF_NO_PI
 
 class TunDevice:
     def __init__(self, ip, netmask, mtu):
         self.logger = logging.getLogger("TunDevice")
-        self.tun = TunTapDevice(name='XBeeNet')
+        self.tun = TunTapDevice(name='XBeeNet', flags=(IFF_TUN | IFF_NO_PI))
         self.tun.addr = ip
         self.tun.netmask = netmask
         self.tun.persist(True)
         self.tun.mtu=mtu
         self.tun.up()
+        self.logger.info("Linux Tun device set up and ready to interface with mesh net")
 
         # setup polling
         self.poller = select.poll()
