@@ -1,9 +1,9 @@
 [Unit]
-Description=XBeeNet XBee TCP/IP Network
+Description=MeshNet XBee TCP/IP Network
 After=network.target
 
 [Service]
-ExecStart=pipenv run python /opt/strangenet/strangenet/main.py
+ExecStart=/opt/meshnet/venv/bin/python3 /opt/meshnet/main.py
 Type=simple
 Restart=always
 WorkingDirectory=/opt/meshnet

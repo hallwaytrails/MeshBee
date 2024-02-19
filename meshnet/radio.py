@@ -173,12 +173,20 @@ class Radio:
     def get_mtu_int(self):
         return self.max_payload_bytes
 
-    def tx(self, destination_ip, payload):
-        destination_node = self.xnet.get_device_by_node_id(destination_ip)
+    def tx(self, dest_ip_bytes, payload):
+        dest_ip_hex = dest_ip_bytes.hex()
+        dest_ip_NI = (str(int(dest_ip_hex[:2], 16)) + '.' + 
+                      str(int(dest_ip_hex[2:4], 16)) + '.' + 
+                      str(int(dest_ip_hex[4:6], 16)) + '.' + 
+                      str(int(dest_ip_hex[6:8], 16)))
+        self.logger.info(f"Sending to NI: {dest_ip_NI}")
+        destination_node = self.xnet.get_device_by_node_id(dest_ip_NI)
         if destination_node is None:
+            self.logger.debug("Destination node not cached. Will attempt to discover")
             # unpredictable behavior will result from duplicate NI's, the following picks the first
-            destination_node = self.xnet.discover_device(destination_ip)
+            destination_node = self.xnet.discover_device(dest_ip_NI)
             if destination_node is None:
+                self.logger.debug("Unable to find destination node")
                 return False
         
         try:

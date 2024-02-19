@@ -21,7 +21,7 @@ def setup_logging():
 ''')
     
 def setup_logger(logger_name):
-    formatter = logging.Formatter('{asctime} - {name:10s} - {levelname:8s} - {filename}:{lineno} - {message}', '%Y%m%d-%H:%M:%S', style='{')
+    formatter = logging.Formatter('{asctime} - {name:10s} - {levelname:8s} - {message}', '%Y%m%d-%H:%M:%S', style='{')
 
     file_handler = logging.FileHandler(APP_LOG)
     file_handler.setLevel(logging.DEBUG)

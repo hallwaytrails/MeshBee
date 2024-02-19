@@ -4,8 +4,8 @@ RADIO_LOGGER = 'Radio'
 TUN_LOGGER = 'TunDevice'
 NET_LOGGER = 'XBeeNet'
 
-# CONFIG_DIR = '/etc/xbeenet'
-CONFIG_DIR = '/tmp/xbeenet'
+CONFIG_DIR = '/etc/xbeenet'
+# CONFIG_DIR = '/tmp/xbeenet'
 CONFIG_NAME = 'config.toml'
 
 APP_LOG_DIR = '/var/xbeenet'
