@@ -1,15 +1,37 @@
+############################################################################
+# 
+#  File: utilities.py
+#  Copyright(c) 2023, Hallway Trails LLC. All rights reserved.
+#
+#  This library is free software; you can redistribute it and/or
+#  modify it under the terms of the GNU Lesser General Public
+#  License as published by the Free Software Foundation; either
+#  version 2.1 of the License, or (at your option) any later version.
+#
+#  This library is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with this library; if not, write to the Free Software
+#  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301
+#  USA
+#
+############################################################################
+
 import logging
 import pkgutil
 import tomlkit
 from pathlib import Path
 from datetime import datetime
 from constants import CONSOLE_LOGGER, CONFIG_DIR, CONFIG_NAME, DEFAULT_CONFIGS, \
-    APP_LOG, APP_LOG_DIR, LOGGER_NAMES
+    APP_LOG, APP_LOG_DIR, LoggerNames
 
 def setup_logging():
     if not Path(APP_LOG_DIR).exists():
         Path(APP_LOG_DIR).mkdir(exist_ok=True)
-    for name in LOGGER_NAMES:
+    for name in LoggerNames:
         setup_logger(name)
     datestamp = datetime.now().strftime('%Y%m%d %H:%M')
     with open(APP_LOG, 'a') as f:

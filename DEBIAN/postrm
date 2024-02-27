@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# systemctl stop meshnet.service
+# systemctl disable meshnet.service
+# rm /etc/systemctl/system/meshnet.service
+# systemctl reset-failed
+# systemctl daemon-reload
+
+# rm -r /etc/meshnet
+# rm -r /opt/meshnet
+# rm /var/log/meshnet.log

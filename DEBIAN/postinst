@@ -1,0 +1,28 @@
+#!/bin/bash
+
+echo "Installing python venv"
+python3 -m venv /opt/meshnet/venv/
+
+/opt/meshnet/venv/bin/pip install /opt/meshnet/installation_files/packages/click-8.1.7-py3-none-any.whl
+/opt/meshnet/venv/bin/pip install /opt/meshnet/installation_files/packages/colorama-0.4.6-py2.py3-none-any.whl
+/opt/meshnet/venv/bin/pip install /opt/meshnet/installation_files/packages/pyserial-3.5-py2.py3-none-any.whl
+/opt/meshnet/venv/bin/pip install /opt/meshnet/installation_files/packages/digi_xbee-1.4.1-py3-none-any.whl
+/opt/meshnet/venv/bin/pip install /opt/meshnet/installation_files/packages/mdurl-0.1.2-py3-none-any.whl
+/opt/meshnet/venv/bin/pip install /opt/meshnet/installation_files/packages/markdown_it_py-3.0.0-py3-none-any.whl
+/opt/meshnet/venv/bin/pip install /opt/meshnet/installation_files/packages/pygments-2.17.2-py3-none-any.whl
+/opt/meshnet/venv/bin/pip install /opt/meshnet/installation_files/packages/pypacker-5.4.tar.gz
+/opt/meshnet/venv/bin/pip install /opt/meshnet/installation_files/packages/python-pytun-2.4.1.tar.gz
+/opt/meshnet/venv/bin/pip install /opt/meshnet/installation_files/packages/rich-13.7.0-py3-none-any.whl
+/opt/meshnet/venv/bin/pip install /opt/meshnet/installation_files/packages/shellingham-1.5.4-py2.py3-none-any.whl
+/opt/meshnet/venv/bin/pip install /opt/meshnet/installation_files/packages/tomlkit-0.12.3-py3-none-any.whl
+/opt/meshnet/venv/bin/pip install /opt/meshnet/installation_files/packages/typing_extensions-4.9.0-py3-none-any.whl
+/opt/meshnet/venv/bin/pip install /opt/meshnet/installation_files/packages/typer-0.9.0-py3-none-any.whl
+
+desktop-file-install /opt/meshnet/installation_files/MeshNet.desktop
+USERS_NAME="${logname}"
+cp /opt/meshnet/installation_files/MeshNet.desktop /home/${USERS_NAME}/Desktop
+
+rm -r /opt/meshnet/installation_files
+
+systemctl daemon-reload
+systemctl enable meshnet.service

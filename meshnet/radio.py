@@ -1,3 +1,25 @@
+############################################################################
+# 
+#  File: radio.py
+#  Copyright(c) 2023, Hallway Trails LLC. All rights reserved.
+#
+#  This library is free software; you can redistribute it and/or
+#  modify it under the terms of the GNU Lesser General Public
+#  License as published by the Free Software Foundation; either
+#  version 2.1 of the License, or (at your option) any later version.
+#
+#  This library is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with this library; if not, write to the Free Software
+#  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301
+#  USA
+#
+############################################################################
+
 import sys
 import subprocess
 import logging
@@ -6,11 +28,11 @@ import time
 from serial.serialutil import SerialException
 from digi.xbee.devices import XBeeDevice
 from digi.xbee.exception import TimeoutException, XBeeException
-from constants import BAUDRATES, DEFAULT_MTU
+from constants import BAUDRATES, DEFAULT_MTU, LoggerNames
 
 class Radio:
     def __init__(self, ip:str="10.0.0.1", port:str="/dev/ttyUSB0", baud:int=230400, net_id:int=1111):
-        self.logger = logging.getLogger("Radio")
+        self.logger = logging.getLogger(LoggerNames.RADIO)
         self.ip = ip
         self.port = port
         self.baud = baud
@@ -41,6 +63,7 @@ class Radio:
             self.logger.info(f"Serial connection to radio already open on {self.port}")
 
         # initial configuration
+        self.logger.info(f"Configuring local XBee as: {self.ip}")
         self.device.set_parameter("NI", bytearray(self.ip, 'utf-8'))
         # The Net ID takes a little processing
         self.device.set_parameter('ID', self.convert_netid())
@@ -68,7 +91,7 @@ class Radio:
             result_decoded = result.decode()
             if 'No such file or directory' in result_decoded: raise FileNotFoundError
             self.logger.info(f"Radio device detected over serial at {self.port}")
-        except FileNotFoundError:
+        except (FileNotFoundError, subprocess.CalledProcessError):
             self.logger.critical(f'Unable to find specified device: {self.port}')
             sys.exit(1)
 
@@ -179,7 +202,6 @@ class Radio:
                       str(int(dest_ip_hex[2:4], 16)) + '.' + 
                       str(int(dest_ip_hex[4:6], 16)) + '.' + 
                       str(int(dest_ip_hex[6:8], 16)))
-        self.logger.info(f"Sending to NI: {dest_ip_NI}")
         destination_node = self.xnet.get_device_by_node_id(dest_ip_NI)
         if destination_node is None:
             self.logger.debug("Destination node not cached. Will attempt to discover")

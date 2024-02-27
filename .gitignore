@@ -11,6 +11,7 @@ build/
 dist/
 .DS_Store
 .vscode/
+packages/
 
 # local test files
 test.py
@@ -18,3 +19,4 @@ test-script.py
 sandbox.py
 todo.txt
 planning.txt
+test.sh

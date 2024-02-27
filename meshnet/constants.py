@@ -1,21 +1,39 @@
+############################################################################
+# 
+#  File: constants.py
+#  Copyright(c) 2023, Hallway Trails LLC. All rights reserved.
+#
+#  This library is free software; you can redistribute it and/or
+#  modify it under the terms of the GNU Lesser General Public
+#  License as published by the Free Software Foundation; either
+#  version 2.1 of the License, or (at your option) any later version.
+#
+#  This library is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with this library; if not, write to the Free Software
+#  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301
+#  USA
+#
+############################################################################
+
 from enum import Enum
 
-RADIO_LOGGER = 'Radio'
-TUN_LOGGER = 'TunDevice'
-NET_LOGGER = 'XBeeNet'
-
-CONFIG_DIR = '/etc/xbeenet'
-# CONFIG_DIR = '/tmp/xbeenet'
+CONFIG_DIR = '/etc/meshnet'
 CONFIG_NAME = 'config.toml'
 
-APP_LOG_DIR = '/var/xbeenet'
-APP_LOG = f'{APP_LOG_DIR}/app.log'
-LOGGER_NAMES = (
-    'Main',
-    'XBeeNet',
-    'Radio',
-    'TunDevice'
-)
+APP_LOG_DIR = '/var/log'
+APP_LOG = f'{APP_LOG_DIR}/meshnet.log'
+
+class LoggerNames(str, Enum):
+    MAIN =  "Main"
+    RADIO = "Radio"
+    TUN =   "TunDevice"
+    NET =   "XBeeNet"
+    GUI =   "Gui"
 
 CONSOLE_LOGGER = True
 DEFAULT_CONFIGS = 'default_configs.toml'

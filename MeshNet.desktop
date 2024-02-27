@@ -1,0 +1,12 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=MeshNet
+Comment=MeshNet XBee TCP/IP Network
+Path=/opt/meshnet
+Exec=/opt/meshnet/meshnet_launcher.sh
+Icon=/opt/meshnet/artifacts/honeycomb.png
+Terminal=false
+StartupWMClass=meshnet
